@@ -1,26 +1,42 @@
 package com.mk.shop.domain;
 
-
-import lombok.AllArgsConstructor;
+import com.mk.shop.domain.enumeration.View;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "ITEM")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Item implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "ID")
     private Long id;
 
-    @Column(name = "PRICE", nullable = false)
+    @Column(name = "TITLE")
+    @NonNull
+    private String title;
+
+    @Column(name = "DESCRIPTION", nullable = false)
+    @NonNull
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    @NonNull
+    @Column(name = "VIEW", nullable = false)
+    private View view;
+
+    @Column(name = "PRICE")
+    @NonNull
     private BigDecimal price;
 
 }
